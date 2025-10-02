@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión de Cafetería</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo i {
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
+
+    .nav-links li {
+        margin-left: 2rem;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    .hero {
+        background: url('images/hero-bg.avif') no-repeat center center/cover;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+        max-width: 600px;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: #D2691E;
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #8B4513;
+    }
+
+    section {
+        padding: 5rem 0;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: #8B4513;
+        margin-bottom: 1rem;
+    }
+
+    .section-title p {
+        color: #666;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .about-text {
+        flex: 1;
+        min-width: 300px;
+        text-align: justify;
+    }
+
+    .about-image {
+        flex: 1;
+        min-width: 300px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .about-image img:hover {
+        transform: scale(1.02);
+    }
+
+    .features {
+        background-color: #f1f1f1;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .feature-card {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #D2691E;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        margin-bottom: 1rem;
+        color: #8B4513;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        padding: 3rem 0;
+        text-align: center;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        margin-bottom: 1.5rem;
+        color: #D2691E;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid #444;
+        padding-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: #8B4513;
+            display: none;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+        }
+    }
+  </style>
+  <link rel="stylesheet" href="css/fontawesome.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <i class="fas fa-coffee"></i>
+        Power Cafe
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="cafeteria.html">Cafetería</a></li>
+        <li><a href="manual.html">Manual</a></li>
+        <li><a href="ejecucion.html">Ejecución</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Sistema de Gestión de Cafetería</h1>
+      <p>Una solución completa para la gestión de mesas, pedidos, empleados y tareas en cafeterías</p>
+      <a href="cafeteria.html" class="btn">Explorar Sistema</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-title">
+      <h2>¿Quiénes Somos?</h2>
+      <p>Desarrolladores de software especializados en soluciones para la industria gastronómica</p>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Somos un equipo de desarrolladores apasionados por crear soluciones tecnológicas que optimicen los procesos en establecimientos gastronómicos. Nuestra experiencia nos ha permitido diseñar un sistema integral que aborda las necesidades específicas de las cafeterías modernas.</p>
+        <p>El Sistema de Gestión de Cafetería Power Cafe es el resultado de meses de investigación, desarrollo y pruebas en entornos reales, asegurando una herramienta robusta y confiable para la gestión diaria de tu negocio.</p>
+        <p>Nuestro objetivo es simplificar las operaciones complejas de una cafetería, permitiendo a los propietarios y administradores enfocarse en lo que realmente importa: ofrecer una experiencia excepcional a sus clientes.</p>
+      </div>
+      <div class="about-image">
+        <img src="images/team.jpg" alt="Equipo de desarrollo Power Cafe">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="project" class="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>El Proyecto</h2>
+      <p>Una solución completa desarrollada en Java para la gestión integral de cafeterías</p>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <h3>¿De qué trata el código?</h3>
+        <p>El Sistema de Gestión de Cafetería Power Cafe es una aplicación Java que permite administrar todos los aspectos operativos de una cafetería:</p>
+        <ul>
+          <li>Gestión de mesas y pedidos</li>
+          <li>Control de inventario de productos</li>
+          <li>Administración de empleados</li>
+          <li>Asignación y seguimiento de tareas</li>
+          <li>Análisis de ventas y estadísticas</li>
+        </ul>
+
+        <h3>Estructura del Sistema</h3>
+        <p>El sistema está organizado en módulos especializados que trabajan de forma integrada:</p>
+        <ul>
+          <li><strong>GestiónMesas.java</strong> - Control de mesas y pedidos</li>
+          <li><strong>MenuAlimentos.java</strong> - Catálogo de productos</li>
+          <li><strong>GestionTareas.java</strong> - Sistema de tareas con prioridades</li>
+          <li><strong>GestionEmpleados.java</strong> - Administración de personal</li>
+          <li><strong>EstadisticasVentas.java</strong> - Análisis de rendimiento</li>
+          <li><strong>Main.java</strong> - Punto de entrada principal</li>
+        </ul>
+      </div>
+      <div class="about-image">
+        <img src="images/code.avif" alt="Código Java">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>Características Principales</h2>
+      <p>Funcionalidades diseñadas para optimizar la gestión de tu cafetería</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-utensils"></i>
+        </div>
+        <h3>Gestión de Mesas</h3>
+        <p>Control completo de mesas, comensales y pedidos con sistema FIFO para procesamiento eficiente.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-list-alt"></i>
+        </div>
+        <h3>Menú Digital</h3>
+        <p>Catálogo completo de productos organizado por categorías con precios y descripciones.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-tasks"></i>
+        </div>
+        <h3>Sistema de Tareas</h3>
+        <p>Asignación y seguimiento de tareas con prioridades y distribución inteligente.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Gestión de Empleados</h3>
+        <p>Administración completa del personal con árbol binario para búsquedas eficientes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-chart-bar"></i>
+        </div>
+        <h3>Análisis de Ventas</h3>
+        <p>Reportes detallados y análisis de tendencias con algoritmos de ordenamiento.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-file-invoice-dollar"></i>
+        </div>
+        <h3>Tickets Automáticos</h3>
+        <p>Generación automática de tickets con formato profesional y almacenamiento en archivos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Sistema Power Cafe</h3>
+        <p>Una solución completa para la gestión de cafeterías desarrollada en Java.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Enlaces Rápidos</h3>
+        <ul style="list-style: none;">
+          <li><a href="index.html" style="color: #fff;">Inicio</a></li>
+          <li><a href="cafeteria.html" style="color: #fff;">Cafetería</a></li>
+          <li><a href="ejecucion.html" style="color: #fff;">Ejecución</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>Desarrollado por el equipo de Power Cafe</p>
+        <p>powercafe@ejemplo.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Sistema de Gestión de Cafetería Power Cafe. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.querySelector('.nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (navToggle) {
+          navToggle.addEventListener('click', function() {
+              navLinks.classList.toggle('active');
+          });
+      }
+  });
+</script>
+</body>
+</html>

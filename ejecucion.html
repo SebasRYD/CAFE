@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejecución del Programa - Power Cafe</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo i {
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
+
+    .nav-links li {
+        margin-left: 2rem;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    .hero {
+        background: url('images/execution-hero.avif') no-repeat center center/cover;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+        max-width: 800px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    section {
+        padding: 4rem 0;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: #8B4513;
+        margin-bottom: 1rem;
+    }
+
+    .section-title p {
+        color: #666;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .content-card {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+    }
+
+    .content-card h3 {
+        color: #8B4513;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f1f1f1;
+    }
+
+    .content-card h4 {
+        color: #D2691E;
+        margin: 1.5rem 0 1rem;
+    }
+
+    .content-card ul, .content-card ol {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .content-card li {
+        margin-bottom: 0.5rem;
+    }
+
+    .requirements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .requirement-card {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        text-align: center;
+        border-top: 4px solid #D2691E;
+    }
+
+    .requirement-icon {
+        font-size: 3rem;
+        color: #D2691E;
+        margin-bottom: 1rem;
+    }
+
+    .requirement-card h4 {
+        color: #8B4513;
+        margin-bottom: 1rem;
+    }
+
+    .steps-container {
+        counter-reset: step-counter;
+    }
+
+    .step {
+        display: flex;
+        margin-bottom: 2rem;
+        align-items: flex-start;
+    }
+
+    .step-number {
+        background-color: #D2691E;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .step-content {
+        flex: 1;
+    }
+
+    .step-content h4 {
+        color: #8B4513;
+        margin-bottom: 0.5rem;
+    }
+
+    .code-block {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 1.5rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        font-family: 'Courier New', monospace;
+    }
+
+    .warning-box {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+    }
+
+    .info-box {
+        background-color: #d1ecf1;
+        border-left: 4px solid #17a2b8;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+    }
+
+    .success-box {
+        background-color: #d4edda;
+        border-left: 4px solid #28a745;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+    }
+
+    .file-structure {
+        background-color: #e9ecef;
+        padding: 1.5rem;
+        border-radius: 5px;
+        margin: 1.5rem 0;
+        font-family: 'Courier New', monospace;
+    }
+
+    .file-structure .file {
+        color: #007bff;
+    }
+
+    .file-structure .folder {
+        color: #6f42c1;
+        font-weight: bold;
+    }
+
+    .execution-example {
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .execution-example img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border: 1px solid #ddd;
+        transition: transform 0.3s ease;
+    }
+
+    .execution-example img:hover {
+        transform: scale(1.02);
+    }
+
+    .execution-example p {
+        margin-top: 1rem;
+        color: #666;
+        font-style: italic;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        padding: 3rem 0;
+        text-align: center;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        margin-bottom: 1.5rem;
+        color: #D2691E;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid #444;
+        padding-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: #8B4513;
+            display: none;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+    }
+  </style>
+  <link rel="stylesheet" href="css/fontawesome.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <i class="fas fa-coffee"></i>
+        Power Cafe
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="cafeteria.html">Cafetería</a></li>
+        <li><a href="manual.html">Manual</a></li>
+        <li><a href="ejecucion.html">Ejecución</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Ejecución del Programa</h1>
+      <p>Guía completa para configurar y ejecutar el Sistema de Gestión de Cafetería</p>
+    </div>
+  </div>
+</section>
+
+<section id="requirements">
+  <div class="container">
+    <div class="section-title">
+      <h2>Requisitos del Sistema</h2>
+      <p>Lo que necesitas para ejecutar correctamente el programa</p>
+    </div>
+
+    <div class="requirements-grid">
+      <div class="requirement-card">
+        <div class="requirement-icon">
+          <i class="fab fa-java"></i>
+        </div>
+        <h4>Java Development Kit</h4>
+        <p>Versión 8 o superior</p>
+      </div>
+
+      <div class="requirement-card">
+        <div class="requirement-icon">
+          <i class="fas fa-desktop"></i>
+        </div>
+        <h4>Sistema Operativo</h4>
+        <p>Windows, Linux o macOS</p>
+      </div>
+
+      <div class="requirement-card">
+        <div class="requirement-icon">
+          <i class="fas fa-terminal"></i>
+        </div>
+        <h4>Terminal/Consola</h4>
+        <p>Para ejecutar comandos</p>
+      </div>
+
+      <div class="requirement-card">
+        <div class="requirement-icon">
+          <i class="fas fa-file-code"></i>
+        </div>
+        <h4>Archivos del Proyecto</h4>
+        <p>Código fuente completo</p>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Requisitos Detallados</h3>
+
+      <h4>Software Necesario:</h4>
+      <ul>
+        <li><strong>Java Development Kit (JDK)</strong>: Versión 8 o superior. Puedes descargarlo desde el sitio oficial de Oracle o usar OpenJDK.</li>
+        <li><strong>Editor de texto o IDE</strong>: Opcional, pero recomendado para visualizar el código (VS Code, IntelliJ IDEA, Eclipse, etc.)</li>
+        <li><strong>Terminal o línea de comandos</strong>: Para compilar y ejecutar el programa.</li>
+      </ul>
+
+      <h4>Archivos Necesarios:</h4>
+      <ul>
+        <li><strong>Main.java</strong> - Clase principal del programa</li>
+        <li><strong>GestionMesas.java</strong> - Módulo de gestión de mesas</li>
+        <li><strong>MenuAlimentos.java</strong> - Módulo del menú de productos</li>
+        <li><strong>GestionTareas.java</strong> - Sistema de gestión de tareas</li>
+        <li><strong>GestionEmpleados.java</strong> - Módulo de empleados</li>
+        <li><strong>EstadisticasVentas.java</strong> - Análisis de ventas</li>
+        <li><strong>menu.csv</strong> - Archivo de datos del menú (debe estar en la misma carpeta)</li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Importante:</strong> Asegúrate de que todos los archivos .java estén en la misma carpeta y que el archivo menu.csv esté presente para el correcto funcionamiento del programa.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="execution-guide" style="background-color: #f1f1f1;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Guía de Ejecución desde tu Computadora</h2>
+      <p>Cómo ejecutar el programa paso a paso</p>
+    </div>
+
+    <div class="content-card">
+      <h3>¿Qué archivo ejecutar?</h3>
+      <p>El archivo principal que necesitas ejecutar para iniciar el programa es:</p>
+
+      <div class="success-box">
+        <h4><i class="fas fa-play-circle"></i> Archivo Principal: <strong>Main.java</strong></h4>
+        <p>Este es el punto de entrada del programa que contiene el método <code>main()</code> y gestiona el menú principal del sistema.</p>
+      </div>
+
+      <h4>Estructura de archivos requerida:</h4>
+      <div class="file-structure">
+        <div class="folder">carpeta-del-proyecto/</div>
+        <div class="file">├── Main.java <strong>(ARCHIVO PRINCIPAL A EJECUTAR)</strong></div>
+        <div class="file">├── GestionMesas.java</div>
+        <div class="file">├── MenuAlimentos.java</div>
+        <div class="file">├── GestionTareas.java</div>
+        <div class="file">├── GestionEmpleados.java</div>
+        <div class="file">├── EstadisticasVentas.java</div>
+        <div class="file">├── GestionArchivosEmpleados.java</div>
+        <div class="file">├── DemoCafeteria.java</div>
+        <div class="file">└── menu.csv <strong>(ARCHIVO DE DATOS DEL MENÚ)</strong></div>
+      </div>
+    </div>
+
+    <div class="steps-container">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Preparar el Entorno</h4>
+          <p>Verifica que tienes Java instalado correctamente. Abre una terminal o línea de comandos y ejecuta:</p>
+          <div class="code-block">java -version</div>
+          <p>Deberías ver información sobre la versión de Java instalada. Si no es así, instala Java antes de continuar.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Navegar al Directorio del Proyecto</h4>
+          <p>Usa el comando <code>cd</code> para navegar a la carpeta donde guardaste los archivos del proyecto:</p>
+          <div class="code-block">cd ruta/a/tu/carpeta/del/proyecto</div>
+          <p>Por ejemplo:</p>
+          <div class="code-block">cd C:\Users\TuUsuario\Desktop\PowerCafe</div>
+          <p class="info-box">
+            <strong>Consejo:</strong> Puedes arrastrar la carpeta del proyecto a la terminal para obtener la ruta automáticamente.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Compilar el Programa</h4>
+          <p>Compila todos los archivos Java del proyecto ejecutando:</p>
+          <div class="code-block">javac *.java</div>
+          <p>Este comando compilará todos los archivos .java en la carpeta actual. Si hay errores de compilación, revísalos y corrige cualquier problema en el código.</p>
+          <div class="info-box">
+            <strong>Nota:</strong> Al compilar, se crearán archivos .class para cada archivo .java. Estos son los archivos ejecutables que Java necesita.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Ejecutar el Programa Principal</h4>
+          <p>Una vez compilado correctamente, ejecuta el programa con:</p>
+          <div class="code-block">java Main.java</div>
+          <p>Este comando ejecutará el método <code>main()</code> de la clase <strong>Main.java</strong> y el programa se iniciará mostrando el menú principal.</p>
+          <div class="success-box">
+            <strong>¡Listo!</strong> Si ves el menú principal del sistema, el programa se está ejecutando correctamente.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h4>Usar el Programa</h4>
+          <p>Una vez ejecutado, el programa mostrará un menú interactivo con las siguientes opciones:</p>
+          <ol>
+            <li><strong>Gestión de Mesas</strong> - Para administrar mesas y pedidos</li>
+            <li><strong>Gestión de Productos</strong> - Para ver y gestionar el menú</li>
+            <li><strong>Gestión de Tareas</strong> - Para asignar y seguir tareas</li>
+            <li><strong>Gestión de Empleados</strong> - Para administrar el personal</li>
+            <li><strong>Análisis de Ventas</strong> - Para ver estadísticas y reportes</li>
+            <li><strong>Demostración</strong> - Ejecuta una demostración automática</li>
+            <li><strong>Salir</strong> - Cierra el programa</li>
+          </ol>
+          <p>Selecciona la opción deseada ingresando el número correspondiente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Ejemplo de Ejecución Exitosa</h3>
+      <p>Al ejecutar el programa correctamente, verás una interfaz similar a esta:</p>
+
+      <div class="execution-example">
+        <img src="images/execution-example.jpg" alt="Ejemplo de ejecución del programa Power Cafe mostrando el menú principal">
+        <p><strong>Figura 1:</strong> Vista del sistema Power Cafe en funcionamiento mostrando el menú principal interactivo</p>
+      </div>
+
+      <div class="info-box">
+        <strong>Nota:</strong> La imagen muestra cómo se vería el programa ejecutándose correctamente en una terminal. Tu interfaz puede variar ligeramente dependiendo de tu sistema operativo y configuración de terminal, pero la estructura del menú será la misma.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="troubleshooting">
+  <div class="container">
+    <div class="section-title">
+      <h2>Solución de Problemas</h2>
+      <p>Posibles errores y cómo solucionarlos</p>
+    </div>
+
+    <div class="content-card">
+      <h3>Errores Comunes</h3>
+
+      <h4>Error: "javac no se reconoce como un comando interno o externo"</h4>
+      <p><strong>Solución:</strong> Java no está instalado o no está configurado correctamente en el PATH del sistema. Instala Java JDK y configura las variables de entorno.</p>
+
+      <h4>Error: "No se puede encontrar o cargar la clase principal Main"</h4>
+      <p><strong>Solución:</strong> El archivo Main.class no existe o no se compiló correctamente. Asegúrate de haber ejecutado <code>javac *.java</code> y de que Main.java esté en la carpeta actual.</p>
+
+      <h4>Error: "FileNotFoundException: menu.csv"</h4>
+      <p><strong>Solución:</strong> El archivo menu.csv no está en la misma carpeta que los archivos .java. Asegúrate de que esté presente.</p>
+
+      <h4>Error al procesar archivos CSV</h4>
+      <p><strong>Solución:</strong> Verifica que los archivos CSV tengan el formato correcto y estén codificados en UTF-8.</p>
+
+      <div class="info-box">
+        <strong>Consejo:</strong> Si experimentas problemas, ejecuta el programa en un IDE como IntelliJ IDEA o Eclipse, que proporciona mejores mensajes de error y depuración.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Comandos Alternativos</h3>
+
+      <h4>Compilar archivos individualmente</h4>
+      <p>Si necesitas compilar archivos por separado:</p>
+      <div class="code-block">
+        javac Main.java
+        javac GestionMesas.java
+        javac MenuAlimentos.java
+        javac GestionTareas.java
+        javac GestionEmpleados.java
+        javac EstadisticasVentas.java
+      </div>
+
+      <h4>Ejecutar con parámetros de memoria</h4>
+      <p>Si el programa requiere más memoria:</p>
+      <div class="code-block">java -Xmx512m Main.java</div>
+
+      <h4>Ejecutar en modo verbose</h4>
+      <p>Para ver información detallada de la ejecución:</p>
+      <div class="code-block">java -verbose Main.java</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Sistema Power Cafe</h3>
+        <p>Una solución completa para la gestión de cafeterías desarrollada en Java.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Enlaces Rápidos</h3>
+        <ul style="list-style: none;">
+          <li><a href="index.html" style="color: #fff;">Inicio</a></li>
+          <li><a href="cafeteria.html" style="color: #fff;">Cafetería</a></li>
+          <li><a href="ejecucion.html" style="color: #fff;">Ejecución</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>Desarrollado por el equipo de Power Cafe</p>
+        <p>powercafe@ejemplo.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Sistema de Gestión de Cafetería Power Cafe. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

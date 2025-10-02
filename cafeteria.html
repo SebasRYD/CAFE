@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explicación del Código - Power Cafe</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo i {
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
+
+    .nav-links li {
+        margin-left: 2rem;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    .hero {
+        background: url('images/cafe-interior.avif') no-repeat center center/cover;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+        max-width: 800px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    section {
+        padding: 4rem 0;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: #8B4513;
+        margin-bottom: 1rem;
+    }
+
+    .section-title p {
+        color: #666;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .content-card {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+    }
+
+    .content-card h3 {
+        color: #8B4513;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f1f1f1;
+    }
+
+    .content-card h4 {
+        color: #D2691E;
+        margin: 1.5rem 0 1rem;
+    }
+
+    .content-card ul, .content-card ol {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .content-card li {
+        margin-bottom: 0.5rem;
+    }
+
+    .code-block {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 1.5rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        font-family: 'Courier New', monospace;
+    }
+
+    .data-structure-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .ds-card {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border-left: 4px solid #D2691E;
+    }
+
+    .ds-card h4 {
+        color: #8B4513;
+        margin-bottom: 1rem;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        padding: 3rem 0;
+        text-align: center;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        margin-bottom: 1.5rem;
+        color: #D2691E;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid #444;
+        padding-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: #8B4513;
+            display: none;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+    }
+  </style>
+  <link rel="stylesheet" href="css/fontawesome.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <i class="fas fa-coffee"></i>
+        Power Cafe
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="cafeteria.html">Cafetería</a></li>
+        <li><a href="manual.html">Manual</a></li>
+        <li><a href="ejecucion.html">Ejecución</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Explicación Detallada del Código</h1>
+      <p>Comprendiendo la arquitectura y funcionamiento del Sistema de Gestión de Cafetería</p>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="container">
+    <div class="section-title">
+      <h2>Arquitectura del Sistema</h2>
+      <p>Una visión general de cómo funciona el sistema de gestión de cafetería</p>
+    </div>
+    <div class="content-card">
+      <h3>Flujo Principal del Sistema</h3>
+      <p>El sistema está diseñado con una arquitectura modular que permite la gestión integral de una cafetería. El flujo principal comienza en la clase <code>Main.java</code> que presenta un menú interactivo con las siguientes opciones:</p>
+
+      <ol>
+        <li><strong>Gestión de Mesas</strong>: Control de mesas, comensales y pedidos</li>
+        <li><strong>Gestión de Productos</strong>: Catálogo completo del menú</li>
+        <li><strong>Gestión de Tareas</strong>: Sistema de asignación y seguimiento de tareas</li>
+        <li><strong>Gestión de Empleados</strong>: Administración del personal</li>
+        <li><strong>Análisis de Ventas</strong>: Reportes y estadísticas</li>
+        <li><strong>Demostración</strong>: Ejecución automática de funciones demo</li>
+      </ol>
+
+      <p>Cada módulo funciona de manera independiente pero se integra perfectamente con los demás, permitiendo un flujo de información coherente a través de toda la aplicación.</p>
+    </div>
+  </div>
+</section>
+
+<section id="modules" style="background-color: #f1f1f1;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Módulos del Sistema</h2>
+      <p>Descripción detallada de cada componente del sistema</p>
+    </div>
+
+    <div class="content-card">
+      <h3>GestionMesas.java</h3>
+      <p>Este módulo se encarga de la gestión completa de las mesas del establecimiento. Sus funciones principales incluyen:</p>
+
+      <h4>Funcionalidades:</h4>
+      <ul>
+        <li>Creación y eliminación de mesas</li>
+        <li>Gestión de comensales por mesa</li>
+        <li>Registro de pedidos con sistema FIFO</li>
+        <li>Procesamiento de pedidos pendientes</li>
+        <li>Generación de tickets al cerrar una mesa</li>
+        <li>Almacenamiento de tickets en archivos de texto</li>
+      </ul>
+
+      <h4>Estructuras de Datos Utilizadas:</h4>
+      <ul>
+        <li><strong>HashMap</strong>: Para almacenar y acceder rápidamente a las mesas por número</li>
+        <li><strong>Queue (LinkedList)</strong>: Para gestionar pedidos en orden FIFO</li>
+        <li><strong>LocalDateTime</strong>: Para registrar timestamps de pedidos</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>MenuAlimentos.java</h3>
+      <p>Módulo responsable del catálogo de productos disponibles en la cafetería.</p>
+
+      <h4>Funcionalidades:</h4>
+      <ul>
+        <li>Carga del menú desde archivo CSV</li>
+        <li>Organización de productos por categorías</li>
+        <li>Búsqueda de productos por ID o nombre</li>
+        <li>Gestión de pedidos individuales</li>
+        <li>Generación de tickets con formato profesional</li>
+      </ul>
+
+      <h4>Estructuras de Datos Utilizadas:</h4>
+      <ul>
+        <li><strong>Array</strong>: Para almacenar los productos del menú</li>
+        <li><strong>LinkedHashMap</strong>: Para mantener el orden de las categorías</li>
+        <li><strong>Queue (LinkedList)</strong>: Para los pedidos en los tickets</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>GestionTareas.java</h3>
+      <p>Sistema de gestión de tareas con prioridades para la organización del trabajo del personal.</p>
+
+      <h4>Funcionalidades:</h4>
+      <ul>
+        <li>Creación de tareas con prioridades (1-5)</li>
+        <li>Procesamiento por prioridad (PriorityQueue)</li>
+        <li>Búsqueda recursiva de tareas</li>
+        <li>Distribución de tareas usando "Divide y Vencerás"</li>
+        <li>Cálculo de tiempo total de tareas pendientes</li>
+        <li>Asignación automática a empleados por departamento</li>
+      </ul>
+
+      <h4>Estructuras de Datos Utilizadas:</h4>
+      <ul>
+        <li><strong>PriorityQueue</strong>: Para gestionar tareas por prioridad</li>
+        <li><strong>Recursión</strong>: Para búsquedas y cálculos</li>
+        <li><strong>Algoritmo Divide y Vencerás</strong>: Para distribución de tareas</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>GestionEmpleados.java</h3>
+      <p>Sistema de administración de empleados utilizando un árbol binario de búsqueda.</p>
+
+      <h4>Funcionalidades:</h4>
+      <ul>
+        <li>Inserción y eliminación de empleados</li>
+        <li>Búsqueda eficiente por ID</li>
+        <li>Recorrido inorden para mostrar empleados ordenados</li>
+        <li>Cálculo recursivo de nómina total</li>
+        <li>Persistencia en archivo CSV</li>
+        <li>Filtrado por departamento</li>
+      </ul>
+
+      <h4>Estructuras de Datos Utilizadas:</h4>
+      <ul>
+        <li><strong>Árbol Binario de Búsqueda (BST)</strong>: Para almacenamiento y búsqueda eficiente</li>
+        <li><strong>Recursión</strong>: Para operaciones del árbol</li>
+        <li><strong>ArrayList</strong>: Para manejo de listas de empleados</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>EstadisticasVentas.java</h3>
+      <p>Módulo de análisis de ventas con algoritmos de ordenamiento y búsqueda.</p>
+
+      <h4>Funcionalidades:</h4>
+      <ul>
+        <li>Lectura y análisis de tickets guardados</li>
+        <li>Ordenamiento con Quicksort recursivo</li>
+        <li>Búsqueda binaria en datos ordenados</li>
+        <li>Análisis de tendencias de productos</li>
+        <li>Cálculo de ventas totales del día</li>
+      </ul>
+
+      <h4>Estructuras de Datos Utilizadas:</h4>
+      <ul>
+        <li><strong>List/ArrayList</strong>: Para manejo de datos de ventas</li>
+        <li><strong>Quicksort</strong>: Para ordenamiento eficiente</li>
+        <li><strong>Búsqueda Binaria</strong>: Para búsqueda rápida en datos ordenados</li>
+        <li><strong>HashMap</strong>: Para análisis de productos más pedidos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="data-structures">
+  <div class="container">
+    <div class="section-title">
+      <h2>Estructuras de Datos Implementadas</h2>
+      <p>Análisis de las estructuras de datos utilizadas en el sistema</p>
+    </div>
+
+    <div class="data-structure-grid">
+      <div class="ds-card">
+        <h4>HashMap</h4>
+        <p><strong>Uso:</strong> Almacenamiento de mesas por número para acceso rápido O(1)</p>
+        <p><strong>Implementación:</strong> En GestionMesas para el mapa de mesas activas</p>
+      </div>
+
+      <div class="ds-card">
+        <h4>Queue (FIFO)</h4>
+        <p><strong>Uso:</strong> Gestión de pedidos en orden de llegada</p>
+        <p><strong>Implementación:</strong> LinkedList para pedidos pendientes, procesados y cancelados</p>
+      </div>
+
+      <div class="ds-card">
+        <h4>PriorityQueue</h4>
+        <p><strong>Uso:</strong> Gestión de tareas por prioridad</p>
+        <p><strong>Implementación:</strong> En GestionTareas con comparador personalizado</p>
+      </div>
+
+      <div class="ds-card">
+        <h4>Árbol Binario de Búsqueda</h4>
+        <p><strong>Uso:</strong> Almacenamiento y búsqueda eficiente de empleados</p>
+        <p><strong>Implementación:</strong> BST personalizado en GestionEmpleados</p>
+      </div>
+
+      <div class="ds-card">
+        <h4>List/ArrayList</h4>
+        <p><strong>Uso:</strong> Almacenamiento de elementos en secuencia</p>
+        <p><strong>Implementación:</strong> Múltiples usos en todo el sistema para listas de datos</p>
+      </div>
+
+      <div class="ds-card">
+        <h4>Algoritmos de Ordenamiento</h4>
+        <p><strong>Uso:</strong> Ordenamiento eficiente de datos</p>
+        <p><strong>Implementación:</strong> Quicksort recursivo en EstadisticasVentas</p>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Implementación de Recursión</h3>
+      <p>El sistema hace un uso extensivo de la recursión para resolver problemas complejos de manera elegante:</p>
+
+      <ul>
+        <li><strong>GestionTareas</strong>: Búsqueda recursiva, cálculo de tiempo total, distribución de tareas</li>
+        <li><strong>GestionEmpleados</strong>: Operaciones del árbol binario (inserción, búsqueda, eliminación)</li>
+        <li><strong>EstadisticasVentas</strong>: Quicksort recursivo, búsqueda binaria recursiva</li>
+      </ul>
+
+      <div class="code-block">
+        // Ejemplo de recursión en GestionEmpleados - Recorrido inorden
+        private static void inordenRecursivo(NodoArbolEmpleados nodo) {
+        if (nodo != null) {
+        inordenRecursivo(nodo.izquierdo);
+        System.out.printf("║ %4d ║ %-68s ║\n",
+        nodo.empleado.id,
+        String.format("%s | %s | Salario: $%,.2f",
+        nodo.empleado.nombre,
+        nodo.empleado.departamento,
+        nodo.empleado.salario));
+        inordenRecursivo(nodo.derecho);
+        }
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Sistema Power Cafe</h3>
+        <p>Una solución completa para la gestión de cafeterías desarrollada en Java.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Enlaces Rápidos</h3>
+        <ul style="list-style: none;">
+          <li><a href="index.html" style="color: #fff;">Inicio</a></li>
+          <li><a href="cafeteria.html" style="color: #fff;">Cafetería</a></li>
+          <li><a href="ejecucion.html" style="color: #fff;">Ejecución</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>Desarrollado por el equipo de Power Cafe</p>
+        <p>powercafe@ejemplo.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Sistema de Gestión de Cafetería Power Cafe. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

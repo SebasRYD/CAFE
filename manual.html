@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Power Cafe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .hero {
+            background: url('images/manual-calidad.jpg') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .content-card h3 {
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f1f1f1;
+        }
+
+        .content-card h4 {
+            color: #D2691E;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .content-card ul, .content-card ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .steps-container {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: #D2691E;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .menu-example {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .menu-example img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-example img:hover {
+            transform: scale(1.02);
+        }
+
+        .menu-example p {
+            margin-top: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid #D2691E;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #D2691E;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: #D2691E;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #8B4513;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="css/fontawesome.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <i class="fas fa-coffee"></i>
+                Power Cafe
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="cafeteria.html">Cafetería</a></li>
+                <li><a href="manual.html">Manual</a></li>
+                <li><a href="ejecucion.html">Ejecución</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Manual de Usuario</h1>
+            <p>Guía completa para usar el Sistema de Gestión de Cafetería Power Cafe</p>
+        </div>
+    </div>
+</section>
+
+<section id="getting-started">
+    <div class="container">
+        <div class="section-title">
+            <h2>Primeros Pasos</h2>
+            <p>Conoce la interfaz principal y cómo navegar por el sistema</p>
+        </div>
+
+        <div class="content-card">
+            <h3>Menú Principal</h3>
+            <p>Al iniciar el programa, verás el menú principal con las siguientes opciones:</p>
+
+            <div class="menu-example">
+                <img src="images/execution-example.jpg" alt="Menú principal del Sistema Power Cafe">
+                <p><strong>Figura 1:</strong> Vista del menú principal del sistema Power Cafe en funcionamiento</p>
+            </div>
+
+            <p>Para seleccionar una opción, simplemente ingresa el número correspondiente y presiona ENTER.</p>
+
+            <div class="info-box">
+                <strong>Consejo:</strong> Siempre puedes regresar al menú principal desde cualquier módulo seleccionando la opción de "Volver al menú principal" o "Salir" en cada submenú.
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="modules-guide" style="background-color: #f1f1f1;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Guía por Módulos</h2>
+            <p>Aprende a usar cada función del sistema</p>
+        </div>
+
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Gestión de Mesas</h4>
+                    <p>Este módulo te permite administrar las mesas de tu cafetería:</p>
+
+                    <h5>Funciones disponibles:</h5>
+                    <ul>
+                        <li><strong>Crear Mesa:</strong> Agregar una nueva mesa al sistema</li>
+                        <li><strong>Eliminar Mesa:</strong> Remover una mesa existente</li>
+                        <li><strong>Agregar Comensales:</strong> Registrar clientes en una mesa</li>
+                        <li><strong>Realizar Pedido:</strong> Tomar órdenes de los clientes</li>
+                        <li><strong>Procesar Pedidos Pendientes:</strong> Preparar las órdenes en orden de llegada</li>
+                        <li><strong>Cerrar Mesa:</strong> Generar ticket y liberar la mesa</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <strong>Ejemplo de uso:</strong> Cuando llegan clientes, creas una mesa, agregas los comensales, tomas su pedido, procesas la orden y finalmente cierras la mesa para generar el ticket de pago.
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Gestión de Productos</h4>
+                    <p>Administra el menú de tu cafetería:</p>
+
+                    <h5>Funciones disponibles:</h5>
+                    <ul>
+                        <li><strong>Ver Menú Completo:</strong> Mostrar todos los productos organizados por categorías</li>
+                        <li><strong>Buscar Producto:</strong> Encontrar productos por nombre o ID</li>
+                        <li><strong>Gestionar Pedido Individual:</strong> Crear un pedido simple sin mesa</li>
+                        <li><strong>Generar Ticket Individual:</strong> Crear factura para pedidos directos</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <strong>Dato importante:</strong> El menú se carga automáticamente desde el archivo menu.csv. Los productos están organizados en categorías como Bebidas, Alimentos, Postres, etc.
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Gestión de Tareas</h4>
+                    <p>Organiza el trabajo del personal:</p>
+
+                    <h5>Funciones disponibles:</h5>
+                    <ul>
+                        <li><strong>Crear Tarea:</strong> Agregar nueva tarea con prioridad (1-5)</li>
+                        <li><strong>Procesar Tarea:</strong> Atender la tarea más urgente primero</li>
+                        <li><strong>Buscar Tarea:</strong> Encontrar tareas específicas</li>
+                        <li><strong>Distribuir Tareas:</strong> Repartir trabajo entre empleados</li>
+                        <li><strong>Ver Tiempo Total:</strong> Calcular tiempo de todas las tareas pendientes</li>
+                    </ul>
+
+                    <div class="warning-box">
+                        <strong>Nota:</strong> Las tareas se procesan por prioridad (1 = más urgente, 5 = menos urgente). El sistema siempre atiende primero las tareas con mayor prioridad.
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Gestión de Empleados</h4>
+                    <p>Administra la información del personal:</p>
+
+                    <h5>Funciones disponibles:</h5>
+                    <ul>
+                        <li><strong>Agregar Empleado:</strong> Registrar nuevo empleado en el sistema</li>
+                        <li><strong>Eliminar Empleado:</strong> Remover empleado del sistema</li>
+                        <li><strong>Buscar Empleado:</strong> Encontrar empleado por ID</li>
+                        <li><strong>Mostrar Empleados:</strong> Ver lista completa ordenada por ID</li>
+                        <li><strong>Calcular Nómina:</strong> Ver total de salarios del personal</li>
+                        <li><strong>Filtrar por Departamento:</strong> Ver empleados por área</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <strong>Ventaja:</strong> El sistema usa un árbol binario que hace las búsquedas muy rápidas, incluso con muchos empleados registrados.
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>Análisis de Ventas</h4>
+                    <p>Obtén reportes y estadísticas de tu negocio:</p>
+
+                    <h5>Funciones disponibles:</h5>
+                    <ul>
+                        <li><strong>Analizar Ventas del Día:</strong> Revisar todos los tickets del día</li>
+                        <li><strong>Ordenar por Monto:</strong> Ver ventas de mayor a menor</li>
+                        <li><strong>Buscar Venta Específica:</strong> Encontrar ticket por monto</li>
+                        <li><strong>Productos Más Vendidos:</strong> Ver tendencias de productos populares</li>
+                        <li><strong>Total del Día:</strong> Calcular ingresos totales</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <strong>Automatización:</strong> Los tickets se guardan automáticamente cuando cierras una mesa. El análisis de ventas lee estos archivos para generar los reportes.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="tips-tricks">
+    <div class="container">
+        <div class="section-title">
+            <h2>Consejos y Mejores Prácticas</h2>
+            <p>Aprovecha al máximo el sistema</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h4>Flujo de Trabajo Recomendado</h4>
+                <p>Sigue este orden: 1. Crear mesa → 2. Agregar comensales → 3. Tomar pedido → 4. Procesar orden → 5. Cerrar mesa</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h4>Gestión del Tiempo</h4>
+                <p>Usa el sistema de tareas con prioridades para organizar el trabajo del personal eficientemente</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Análisis Continuo</h4>
+                <p>Revisa regularmente el análisis de ventas para identificar productos populares y tendencias</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4>Gestión de Personal</h4>
+                <p>Mantén actualizada la información de empleados para asignaciones precisas de tareas</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3>Ejemplo de Uso en un Día Típico</h3>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Apertura</h4>
+                        <p>Al abrir la cafetería, revisa las tareas pendientes y asígnalas al personal correspondiente usando el módulo de Gestión de Tareas.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Servicio</h4>
+                        <p>Durante el servicio, usa el módulo de Gestión de Mesas para atender a los clientes: crear mesas, tomar pedidos y procesar órdenes.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Cierre</h4>
+                        <p>Al final del día, usa el módulo de Análisis de Ventas para revisar el desempeño del día y generar reportes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="troubleshooting" style="background-color: #f1f1f1;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Solución de Problemas Comunes</h2>
+            <p>¿Tienes problemas usando el sistema?</p>
+        </div>
+
+        <div class="content-card">
+            <h3>Problemas Frecuentes</h3>
+
+            <h4>No puedo encontrar un producto en el menú</h4>
+            <p><strong>Solución:</strong> Usa la función "Buscar Producto" en el módulo de Gestión de Productos. Puedes buscar por nombre o ID.</p>
+
+            <h4>Las tareas no se están procesando en el orden correcto</h4>
+            <p><strong>Solución:</strong> Recuerda que las tareas se procesan por prioridad (1-5). Verifica que estés asignando las prioridades correctamente.</p>
+
+            <h4>No encuentro un empleado en el sistema</h4>
+            <p><strong>Solución:</strong> Usa la función "Buscar Empleado" ingresando el ID exacto. También puedes ver la lista completa ordenada.</p>
+
+            <h4>Los tickets no se están generando</h4>
+            <p><strong>Solución:</strong> Asegúrate de usar la opción "Cerrar Mesa" en el módulo de Gestión de Mesas para generar el ticket automáticamente.</p>
+
+            <div class="info-box">
+                <strong>Recuerda:</strong> Si experimentas problemas técnicos con el programa mismo (no con su uso), consulta la sección "Ejecución" para solución de problemas de instalación y configuración.
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sistema Power Cafe</h3>
+                <p>Una solución completa para la gestión de cafeterías desarrollada en Java.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul style="list-style: none;">
+                    <li><a href="index.html" style="color: #fff;">Inicio</a></li>
+                    <li><a href="cafeteria.html" style="color: #fff;">Cafetería</a></li>
+                    <li><a href="manual.html" style="color: #fff;">Manual</a></li>
+                    <li><a href="ejecucion.html" style="color: #fff;">Ejecución</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Desarrollado por el equipo de Power Cafe</p>
+                <p>powercafe@ejemplo.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sistema de Gestión de Cafetería Power Cafe. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
